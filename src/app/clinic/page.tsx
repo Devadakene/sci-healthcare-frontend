@@ -21,6 +21,7 @@ import { QrScannerModal } from '@/components/QrScannerModal';
 import { VoucherRow } from '@/components/VoucherRow';
 import { useToast } from '@/components/Toast';
 import { Button, Card, Empty, ExplorerLink } from '@/components/ui';
+import { Skeleton, SkeletonRow } from '@/components/Skeleton';
 
 import { useLocaleContext } from '@/i18n/LocaleContext';
 
@@ -232,14 +233,16 @@ export default function ClinicDeskPage() {
                       : '—'}
                 </div>
                 <div className="mt-0.5 text-xs text-[var(--color-ink-soft)]">
-                  {earningsLoading
-                    ? t('common.loading')
-                    : t('clinic.earningsSettledDetail', {
-                        count: clinicStats?.settledVouchers ?? earnings.settledCount,
-                        net: earningsReady
-                          ? `$${formatUsdc(earnings.netReceived, locale)}`
-                          : '—',
-                      })}
+                  {earningsLoading ? (
+                    <Skeleton className="mt-1 h-3 w-28" />
+                  ) : (
+                    t('clinic.earningsSettledDetail', {
+                      count: clinicStats?.settledVouchers ?? earnings.settledCount,
+                      net: earningsReady
+                        ? `$${formatUsdc(earnings.netReceived, locale)}`
+                        : '—',
+                    })
+                  )}
                 </div>
               </Card>
             </div>
@@ -253,13 +256,15 @@ export default function ClinicDeskPage() {
                   {earningsReady ? `$${formatUsdc(earnings.pending, locale)}` : '—'}
                 </div>
                 <div className="mt-0.5 text-xs text-[var(--color-ink-soft)]">
-                  {earningsLoading
-                    ? t('common.loading')
-                    : earningsReady
-                      ? t('clinic.earningsPendingDetail', {
-                          count: earnings.pendingCount,
-                        })
-                      : t('clinic.earningsUnavailable')}
+                  {earningsLoading ? (
+                    <Skeleton className="mt-1 h-3 w-28" />
+                  ) : earningsReady ? (
+                    t('clinic.earningsPendingDetail', {
+                      count: earnings.pendingCount,
+                    })
+                  ) : (
+                    t('clinic.earningsUnavailable')
+                  )}
                 </div>
               </Card>
             </div>
@@ -289,9 +294,10 @@ export default function ClinicDeskPage() {
 
             <Card className="p-4">
               {earningsLoading ? (
-                <p className="text-sm text-[var(--color-ink-soft)]">
-                  {t('common.loading')}
-                </p>
+                <div className="space-y-4 py-2">
+                  <SkeletonRow />
+                  <SkeletonRow />
+                </div>
               ) : earningsError ? (
                 <p className="text-sm text-[var(--color-ink-soft)]">
                   {t('clinic.earningsUnavailable')}

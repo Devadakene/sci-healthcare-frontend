@@ -33,6 +33,7 @@ import { TestUsdc } from '@/components/TestUsdc';
 import { CopyValue } from '@/components/CopyValue';
 import { useToast } from '@/components/Toast';
 import { Alert, Button, Card, ExplorerLink, Field } from '@/components/ui';
+import { SkeletonDetail } from '@/components/Skeleton';
 
 /**
  * Registry status in the words a funder reads. A funder choosing a clinic
@@ -390,7 +391,7 @@ export default function ClinicPage({
   if (loadRawError instanceof ApiError && loadRawError.status === 404) notFound();
   if (loadError) return <Alert>{loadError}</Alert>;
   if (!provider) {
-    return <p className="text-sm text-[var(--color-ink-soft)]">Loading clinic…</p>;
+    return <SkeletonDetail />;
   }
 
   const status = STATUS_BADGES[provider.status] ?? UNKNOWN_STATUS;

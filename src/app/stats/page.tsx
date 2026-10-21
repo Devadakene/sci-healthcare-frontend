@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { formatUsdc } from '@/lib/amounts';
 import { useDailyStats, useProviders, useStats, useVouchers } from '@/lib/hooks';
 import { Card, Empty } from '@/components/ui';
+import { SkeletonCard } from '@/components/Skeleton';
 import { WidgetBoundary } from '@/components/WidgetBoundary';
 
 type TimeRange = 7 | 14 | 30 | 90;
@@ -286,7 +287,10 @@ export default function StatsPage() {
       </div>
 
       {dailyLoading && (
-        <p className="text-sm text-[var(--color-ink-soft)]">Loading activity time series…</p>
+        <div className="grid gap-6 lg:grid-cols-2">
+          <SkeletonCard lines={4} />
+          <SkeletonCard lines={4} />
+        </div>
       )}
 
       {/* Daily Charts */}
