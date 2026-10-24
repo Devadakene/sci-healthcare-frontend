@@ -6,6 +6,7 @@ import { formatUsdc } from '@/lib/amounts';
 import { useDailyStats, useProviders, useStats, useVouchers } from '@/lib/hooks';
 import { Card, Empty } from '@/components/ui';
 import { DataTable } from '@/components/DataTable';
+import { SkeletonCard } from '@/components/Skeleton';
 import { WidgetBoundary } from '@/components/WidgetBoundary';
 
 type TimeRange = 7 | 14 | 30 | 90;

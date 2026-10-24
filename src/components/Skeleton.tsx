@@ -1,11 +1,11 @@
-import { Card } from './ui';
+import { Card } from "./ui";
 
 export function Skeleton({
-  className = '',
-  'aria-hidden': ariaHidden = true,
+  className = "",
+  "aria-hidden": ariaHidden = true,
 }: {
   className?: string;
-  'aria-hidden'?: boolean;
+  "aria-hidden"?: boolean;
 }) {
   return (
     <div
@@ -16,7 +16,7 @@ export function Skeleton({
 }
 
 export function SkeletonRow({
-  className = '',
+  className = "",
   lines = 2,
 }: {
   className?: string;
@@ -40,44 +40,37 @@ export function SkeletonRow({
 }
 
 export function SkeletonCard({
-  className = '',
+  className = "",
   lines = 3,
 }: {
   className?: string;
   lines?: number;
 }) {
   return (
-    <Card
-      role="status"
-      aria-busy="true"
-      aria-label="Loading card"
-      className={`space-y-4 p-5 ${className}`}
-    >
-      <span className="sr-only">Loading…</span>
-      <div className="flex items-start justify-between gap-3">
-        <div className="space-y-2">
-          <Skeleton className="h-5 w-36" />
-          <Skeleton className="h-3 w-24" />
-        </div>
-        <Skeleton className="h-5 w-16 rounded-full" />
-      </div>
-      <div className="space-y-2 pt-2">
-        {Array.from({ length: lines }).map((_, i) => (
-          <div key={i} className="flex justify-between gap-3">
-            <Skeleton className="h-3 w-28" />
-            <Skeleton className="h-3 w-14" />
+    <div role="status" aria-busy="true" aria-label="Loading card">
+      <Card className={`space-y-4 p-5 ${className}`}>
+        <span className="sr-only">Loading…</span>
+        <div className="flex items-start justify-between gap-3">
+          <div className="space-y-2">
+            <Skeleton className="h-5 w-36" />
+            <Skeleton className="h-3 w-24" />
           </div>
-        ))}
-      </div>
-    </Card>
+          <Skeleton className="h-5 w-16 rounded-full" />
+        </div>
+        <div className="space-y-2 pt-2">
+          {Array.from({ length: lines }).map((_, i) => (
+            <div key={i} className="flex justify-between gap-3">
+              <Skeleton className="h-3 w-28" />
+              <Skeleton className="h-3 w-14" />
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
   );
 }
 
-export function SkeletonDetail({
-  className = '',
-}: {
-  className?: string;
-}) {
+export function SkeletonDetail({ className = "" }: { className?: string }) {
   return (
     <div
       role="status"
